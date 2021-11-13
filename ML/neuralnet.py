@@ -13,7 +13,7 @@ def init_net(n_inputs, n_hidden, n_output):
 #test = init_net(2, 3, 2)
 #print (test)
 def activation(input_x):
-    return 1.0 / (1.0 + (np.exp(-input_x)))
+    return 1 / (1 + (np.exp(-input_x)))
 
 #print (activation(1))
 
@@ -30,8 +30,8 @@ def forward_prop(network, row):
     for layer in network:
         new_inputs = []
         for neuron in layer:
-            activation = lin(neuron['weights'], inputs)
-            neuron['output'] = activation(activation)
+            activation1 = lin(neuron['weights'], inputs)
+            neuron['output'] = activation(activation1)
             new_inputs.append(neuron['output'])
         inputs = new_inputs
     return inputs
