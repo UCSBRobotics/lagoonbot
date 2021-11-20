@@ -7,14 +7,14 @@ def init_weights(n_inputs, n_hidden, n_output):
 	hidden = np.random.rand(n_hidden, n_inputs + 1)
 	# hidden -> output weights
 	output = np.random.rand(n_output, n_hidden + 1)
-	return np.array([hidden, output])
+	return [hidden, output]
 
 
 def activation(input_x):
 	return 1 / (1 + (np.exp(-input_x)))
 
 def lin(weights, inputs):
-	if (len(weights) != len(inputs) + 1)
+	if len(weights) != len(inputs) + 1:
 		print('eat shit')
 		return
 
@@ -22,31 +22,26 @@ def lin(weights, inputs):
 	for j in range(len(inputs)):
 		sum += weights[j] * inputs[j]
 	
+	# bias
 	sum += weights[-1]
 	return sum
 
-def forward_prop(network, row):
-	print(network)
+def forward_pass(network, outputs, row):
 	inputs = row
-	counter = 0
-	for layer in network:
-		print('layer type:', type(layer))
-		print('layer dtype:', layer.dtype)
+	for i in range(len(network)):
+		layer = network[i]
 		new_inputs = []
-		for neuron in layer:
-			print('neuron type:', type(neuron))
-			print('iter:', counter)
-			print('wlen:', len(neuron['weights']))
-			activation1 = lin(neuron['weights'], inputs)
-			neuron['output'] = activation(activation1)
-			new_inputs.append(neuron['output'])
+		for j in range(len(layer)):
+			neuron = layer[j]
+			activation1 = lin(neuron, inputs)
+			outputs[i][j]  = activation(activation1)
+			new_inputs.append(outputs[i][j])
 		inputs = new_inputs
-		counter += 1
 	return inputs
 
-'''
-test = init_net(3, 2, 2)
-row = [1, 0, 1]
-output = forward_prop(test, row)
+shape = (3, 2, 2)
+network = init_weights(shape[0], shape[1], shape[2])
+outputs = np.zeros(shape)
+inputs = [1, 0, 1]
+output = forward_pass(network, outputs, inputs)
 print (output)
-'''
