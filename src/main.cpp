@@ -9,14 +9,14 @@ double serialToPower(int serialInput) {
   return serialInput / 500.0 - 3;
 }
 
-double forwardMovement(int serialInput) { 
+double forwardMovement(int serialInput) {
   double power = serialToPower(serialInput);
   //left_motor.setPower(power);
   //right_motor.setPower(power);
   return power;
 }
 
-double rotation(int serialInput) { 
+double rotation(int serialInput) {
   double rotation_power = serialToPower(serialInput);
   //left_motor.setPower(-power);
   //right_motor.setPower(power);
@@ -55,5 +55,4 @@ void loop() {
   Serial.print(depth(IBus.readChannel(2)));
   Serial.println();
   delay(200);
-
 }
